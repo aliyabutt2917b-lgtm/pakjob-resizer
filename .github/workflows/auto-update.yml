@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-now: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -20,7 +20,7 @@ jobs:
       - name: Run Build Script to Clean & Regenerate HTML
         run: node build.js
 
-      - name: Commit and Push Updated File to Vercel/Netlify
+      - name: Commit and Push Updated File to Vercel
         run: |
           git config --global user.name "Auto-Update-Agent"
           git config --global user.email "bot@github.com"
