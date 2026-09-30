@@ -1,65 +1,4 @@
-// build.js - Silent AI Agent Build Script
-const fs = require('fs');
-
-// 1. Trending Active Jobs & Schemes Data (Auto-Filtered by Expiry Date)
-// آپ اس ڈیٹا آئٹمز میں نئی جابز اور سکیمیں شامل کر سکتے ہیں یا AI API سے بھی fetch کر سکتے ہیں۔
-const database = [
-    {
-        id: "ppsc_educators",
-        name: "👤 PPSC Educators & Sub-Inspector (Max 20 KB | 150x200)",
-        maxKB: 20, w: 150, h: 200,
-        deadline: "2026-10-15",
-        guideTitle: "💡 PPSC میں 20KB تصویر اپلوڈ کرنے کی گائیڈ",
-        guideBody: "PPSC پورٹل پر صرف 20KB اور 150x200 سائز کی تصویر قبول ہوتی ہے۔ ڈراپ ڈاؤن سے PPSC چنیں اور ایک کلک پر سائز کم کریں۔"
-    },
-    {
-        id: "fpsc_inspector",
-        name: "👤 FPSC Inspector & Custom Officer (Max 30 KB | 300x300)",
-        maxKB: 30, w: 300, h: 300,
-        deadline: "2026-10-25",
-        guideTitle: "💡 FPSC آن لائن فارم گائیڈ",
-        guideBody: "FPSC پورٹل پر 30KB سائز کی پاسپورٹ فوٹو چاہیے ہوتی ہے۔ سائز فوراً سیٹ کریں۔"
-    },
-    {
-        id: "cm_scheme_2026",
-        name: "🎓 CM Laptop & Youth Scheme (Max 50 KB | CNIC/Degree)",
-        maxKB: 50, w: 800, h: 500,
-        deadline: "2026-11-05",
-        guideTitle: "🎓 Laptop & Scheme Documents Guide 2026",
-        guideBody: "سکالرشپ اور لیپ ٹاپ سکیم میں اپلائی کرنے کے لیے شناختی کارڈ یا ڈگری رزلٹ کارڈ کا سائز 50KB سے کم رکھیں۔"
-    },
-    {
-        id: "nts_gen",
-        name: "👤 NTS / OTS / PTS General Forms (Max 50 KB)",
-        maxKB: 50, w: 300, h: 300,
-        deadline: "2026-12-31", // Ongoing
-        guideTitle: "📄 NTS Application Form Photo Setup",
-        guideBody: "NTS فارم کے لیے 50KB سے کم سائز کی تصویر ڈراپ ڈاؤن منتخب کر کے بنائیں۔"
-    }
-];
-
-// 2. Filter Expired Deadlines Automatically (Today's Date Evaluation)
-const today = new Date().toISOString().split('T')[0];
-const activeItems = database.filter(item => item.deadline >= today);
-
-// 3. Build Dynamic Dropdown Options & Presets JS Engine
-let dropdownHTML = `<optgroup label="🔥 Active Trending Jobs & Schemes (تازہ ترین)">`;
-let presetsJSObj = {};
-let guideCardsHTML = ``;
-
-activeItems.forEach(item => {
-    dropdownHTML += `\n            <option value="${item.id}">${item.name}</option>`;
-    presetsJSObj[item.id] = { maxKB: item.maxKB, w: item.w, h: item.h };
-    guideCardsHTML += `
-        <div class="guide-card">
-            <h4>${item.guideTitle}</h4>
-            <p>${item.guideBody}<br><span style="color:#059669; font-weight:bold;">آخری تاریخ: ${item.deadline}</span></p>
-        </div>`;
-});
-dropdownHTML += `\n        </optgroup>`;
-
-// 4. Generate Clean, Ultra-Light HTML Page Template
-const htmlContent = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -102,7 +41,12 @@ const htmlContent = `<!DOCTYPE html>
     <!-- Auto-Generated Dropdown -->
     <label>Select Active Job / جاب منتخب کریں: <span>(تازہ ترین نوکریاں)</span></label>
     <select id="preset">
-        ${dropdownHTML}
+        <optgroup label="🔥 Active Trending Jobs & Schemes (تازہ ترین)">
+            <option value="ppsc_educators">👤 PPSC Educators & Sub-Inspector (Max 20 KB | 150x200)</option>
+            <option value="fpsc_inspector">👤 FPSC Inspector & Custom Officer (Max 30 KB | 300x300)</option>
+            <option value="cm_scheme_2026">🎓 CM Laptop & Youth Scheme (Max 50 KB | CNIC/Degree)</option>
+            <option value="nts_gen">👤 NTS / OTS / PTS General Forms (Max 50 KB)</option>
+        </optgroup>
     </select>
 
     <!-- Visual Upload Input -->
@@ -136,7 +80,23 @@ const htmlContent = `<!DOCTYPE html>
             <span>📢 Schemes & Apply Guides</span>
             <span class="badge">Live Updated</span>
         </div>
-        ${guideCardsHTML}
+        
+        <div class="guide-card">
+            <h4>💡 PPSC میں 20KB تصویر اپلوڈ کرنے کی گائیڈ</h4>
+            <p>PPSC پورٹل پر صرف 20KB اور 150x200 سائز کی تصویر قبول ہوتی ہے۔ ڈراپ ڈاؤن سے PPSC چنیں اور ایک کلک پر سائز کم کریں۔<br><span style="color:#059669; font-weight:bold;">آخری تاریخ: 2026-10-15</span></p>
+        </div>
+        <div class="guide-card">
+            <h4>💡 FPSC آن لائن فارم گائیڈ</h4>
+            <p>FPSC پورٹل پر 30KB سائز کی پاسپورٹ فوٹو چاہیے ہوتی ہے۔ سائز فوراً سیٹ کریں۔<br><span style="color:#059669; font-weight:bold;">آخری تاریخ: 2026-10-25</span></p>
+        </div>
+        <div class="guide-card">
+            <h4>🎓 Laptop & Scheme Documents Guide 2026</h4>
+            <p>سکالرشپ اور لیپ ٹاپ سکیم میں اپلائی کرنے کے لیے شناختی کارڈ یا ڈگری رزلٹ کارڈ کا سائز 50KB سے کم رکھیں۔<br><span style="color:#059669; font-weight:bold;">آخری تاریخ: 2026-11-05</span></p>
+        </div>
+        <div class="guide-card">
+            <h4>📄 NTS Application Form Photo Setup</h4>
+            <p>NTS فارم کے لیے 50KB سے کم سائز کی تصویر ڈراپ ڈاؤن منتخب کر کے بنائیں۔<br><span style="color:#059669; font-weight:bold;">آخری تاریخ: 2026-12-31</span></p>
+        </div>
     </div>
 
     <!-- AdSense Footer -->
@@ -154,7 +114,7 @@ const htmlContent = `<!DOCTYPE html>
     var downloadLink = document.getElementById('downloadLink');
 
     var selectedFile = null;
-    var PRESETS = ${JSON.stringify(presetsJSObj)};
+    var PRESETS = {"ppsc_educators":{"maxKB":20,"w":150,"h":200},"fpsc_inspector":{"maxKB":30,"w":300,"h":300},"cm_scheme_2026":{"maxKB":50,"w":800,"h":500},"nts_gen":{"maxKB":50,"w":300,"h":300}};
 
     fileInput.onchange = function(e) {
         if (e.target.files && e.target.files[0]) {
@@ -208,7 +168,4 @@ const htmlContent = `<!DOCTYPE html>
 </script>
 
 </body>
-</html>`;
-
-fs.writeFileSync('index.html', htmlContent);
-console.log('Build Completed: Expiry dates cleaned and index.html updated!');
+</html>
