@@ -1,8 +1,6 @@
-// build.js - Silent AI Agent Build Script
 const fs = require('fs');
 
 // 1. Trending Active Jobs & Schemes Data (Auto-Filtered by Expiry Date)
-// آپ اس ڈیٹا آئٹمز میں نئی جابز اور سکیمیں شامل کر سکتے ہیں یا AI API سے بھی fetch کر سکتے ہیں۔
 const database = [
     {
         id: "ppsc_educators",
@@ -32,13 +30,13 @@ const database = [
         id: "nts_gen",
         name: "👤 NTS / OTS / PTS General Forms (Max 50 KB)",
         maxKB: 50, w: 300, h: 300,
-        deadline: "2026-12-31", // Ongoing
+        deadline: "2026-12-31",
         guideTitle: "📄 NTS Application Form Photo Setup",
         guideBody: "NTS فارم کے لیے 50KB سے کم سائز کی تصویر ڈراپ ڈاؤن منتخب کر کے بنائیں۔"
     }
 ];
 
-// 2. Filter Expired Deadlines Automatically (Today's Date Evaluation)
+// 2. Filter Expired Deadlines Automatically
 const today = new Date().toISOString().split('T')[0];
 const activeItems = database.filter(item => item.deadline >= today);
 
@@ -58,7 +56,7 @@ activeItems.forEach(item => {
 });
 dropdownHTML += `\n        </optgroup>`;
 
-// 4. Generate Clean, Ultra-Light HTML Page Template
+// 4. Generate Clean HTML Template
 const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,16 +94,13 @@ const htmlContent = `<!DOCTYPE html>
     <h2 class="title">⚡ PakJob Resizer & Portal</h2>
     <div class="subtitle">تمام سرکاری ملازمتوں اور سکیموں کا حل</div>
 
-    <!-- AdSense Header -->
     <div class="ad-space"><span>Advertisement</span></div>
 
-    <!-- Auto-Generated Dropdown -->
     <label>Select Active Job / جاب منتخب کریں: <span>(تازہ ترین نوکریاں)</span></label>
     <select id="preset">
         ${dropdownHTML}
     </select>
 
-    <!-- Visual Upload Input -->
     <label>Choose Photo / تصویر منتخب کریں:</label>
     <div class="btn-upload" onclick="document.getElementById('fileInput').click()">
         <strong>📁 Click to Select Photo</strong>
@@ -127,10 +122,8 @@ const htmlContent = `<!DOCTYPE html>
         </a>
     </div>
 
-    <!-- AdSense Middle -->
     <div class="ad-space"><span>Advertisement</span></div>
 
-    <!-- Auto-Updated Guides Section -->
     <div class="guide-box">
         <div class="guide-title">
             <span>📢 Schemes & Apply Guides</span>
@@ -139,7 +132,6 @@ const htmlContent = `<!DOCTYPE html>
         ${guideCardsHTML}
     </div>
 
-    <!-- AdSense Footer -->
     <div class="ad-space"><span>Advertisement</span></div>
 </div>
 
@@ -211,4 +203,4 @@ const htmlContent = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync('index.html', htmlContent);
-console.log('Build Completed: Expiry dates cleaned and index.html updated!');
+console.log('Build Completed: Updated index.html generated!');
