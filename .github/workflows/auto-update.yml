@@ -2,28 +2,32 @@ name: Auto-Clean Expired Jobs & Rebuild
 
 on:
   schedule:
-    # Runs every night at midnight UTC automatically
-    - cron: '0 0 * * *'
-  workflow_dispatch: # Manual trigger button
+    - cron: '0 0 * * *' # Midnight UTC
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
-      - name: Run Build Script to Clean & Regenerate HTML
+      - name: Run AI Scraper for Latest Jobs
+        run: node ai-fetch.js
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Run Build Script
         run: node build.js
 
-      - name: Commit and Push Updated File to Vercel
+      - name: Commit and Push Updated File
         run: |
           git config --global user.name "Auto-Update-Agent"
           git config --global user.email "bot@github.com"
-          git add index.html
-          git commit -m "Auto-clean expired job deadlines" || exit 0
+          git add index.html dynamic-jobs.json || true
+          git commit -m "Auto-update dynamic AI jobs and build portal" || exit 0
           git push
