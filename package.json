@@ -4,5 +4,8 @@
   "type": "commonjs",
   "scripts": {
     "build": "node build.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.25.0"
   }
 }
