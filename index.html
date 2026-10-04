@@ -3,220 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PakJob Photo Resizer & Apply Guides</title>
+    <title>PakJob Image Resizer 2026 - PPSC, FPSC & NTS Photo Compressor</title>
+    <meta name="description" content="Resize and compress photos for Pakistani government job portals (PPSC, FPSC, NTS, ETEA) to exact KB and dimensions online for free.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
-        body { background: #f8fafc; margin: 0; padding: 12px; display: flex; flex-direction: column; align-items: center; }
-        .card { background: #ffffff; max-width: 480px; width: 100%; padding: 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; margin-bottom: 16px; }
-        
-        /* Hot Banner Alert */
-        .hot-banner { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 10px 14px; border-radius: 8px; margin-bottom: 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; animation: pulse 2s infinite; }
-        .hot-banner strong { font-size: 0.85rem; }
-        .hot-badge { background: #fef08a; color: #854d0e; font-size: 0.7rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
-
-        .title { text-align: center; color: #0f172a; margin: 0 0 4px 0; font-size: 1.3rem; }
-        .subtitle { text-align: center; color: #059669; font-size: 0.85rem; font-weight: bold; margin-bottom: 16px; }
-        label { display: block; margin-top: 12px; font-weight: bold; color: #334155; font-size: 0.85rem; }
-        select, input[type="file"] { width: 100%; padding: 12px; margin-top: 6px; border: 2px solid #cbd5e1; border-radius: 8px; background: #f8fafc; font-size: 0.9rem; }
-        .btn-upload { background: #f0f9ff; border: 2px dashed #0284c7; padding: 14px; border-radius: 8px; text-align: center; cursor: pointer; margin-top: 8px; }
-        .btn-action { width: 100%; background: #059669; color: #ffffff; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 16px; }
-        .btn-download { width: 100%; background: #2563eb; color: #ffffff; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; text-decoration: none; display: block; text-align: center; margin-top: 10px; }
-        #result-box { margin-top: 16px; text-align: center; display: none; background: #f0fdf4; padding: 12px; border-radius: 8px; border: 1px solid #bbf7d0; }
-        #preview-img { max-width: 140px; border-radius: 6px; border: 1px solid #cbd5e1; margin-top: 8px; }
-        
-        .guide-box { border-top: 2px solid #e2e8f0; padding-top: 12px; margin-top: 16px; }
-        .guide-card { background: #ffffff; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; }
-        .card-header { display: flex; justify-content: space-between; align-items: center; }
-        .guide-card h4 { margin: 0; font-size: 0.9rem; color: #0284c7; }
-        .view-btn { font-size: 0.75rem; background: #e0f2fe; color: #0369a1; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
-
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; padding: 16px; z-index: 1000; }
-        .modal-content { background: white; max-width: 440px; width: 100%; padding: 20px; border-radius: 12px; position: relative; }
-        .close-btn { position: absolute; top: 12px; left: 16px; font-size: 1.5rem; cursor: pointer; color: #64748b; }
-        .modal h3 { margin-top: 0; color: #0f172a; font-size: 1.1rem; padding-left: 20px; }
-        .modal ul { padding-right: 20px; color: #334155; font-size: 0.9rem; line-height: 1.6; }
+        body { font-family: 'Inter', sans-serif; }
+        .urdu-font { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2.2; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
 
-<div class="card">
-    <!-- Top Hot Alert Banner -->
-    <div class="hot-banner" onclick="selectHotJob('ppsc_educators_2026')">
-        <div>
-            <span class="hot-badge">🔥 HOT RIGHT NOW</span>
-            <strong style="display:block; margin-top:2px;">🔥 PPSC ائجوکیٹرز اور تازہ ترین اسامیوں کی گائیڈ</strong>
+    <!-- 1. Header / Navbar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between" dir="ltr">
+            <a href="/" class="flex items-center gap-2 font-bold text-lg text-emerald-700">
+                <span class="bg-emerald-600 text-white p-1.5 rounded-lg text-xs font-black">PJR</span>
+                PakJob Resizer
+            </a>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+                <a href="/" class="text-emerald-600 font-semibold">Home Tool</a>
+                <a href="/pages/about.html" class="hover:text-emerald-600 transition">About Us</a>
+                <a href="/pages/privacy.html" class="hover:text-emerald-600 transition">Privacy Policy</a>
+                <a href="/pages/terms.html" class="hover:text-emerald-600 transition">Terms</a>
+                <a href="/pages/contact.html" class="hover:text-emerald-600 transition">Contact Support</a>
+            </nav>
+
+            <a href="#resizer-section" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition">
+                Resize Photo Now
+            </a>
         </div>
-        <span style="font-size:0.8rem; text-decoration:underline;">کلک کریں ⚡</span>
-    </div>
+    </header>
 
-    <h2 class="title">⚡ PakJob Resizer & Portal</h2>
-    <div class="subtitle">تمام سرکاری ملازمتوں اور سکیموں کا حل</div>
-
-    <label>مطلوبہ سائز یا جاب منتخب کریں:</label>
-    <select id="preset">
-        
-            <option value="universal_standard" selected>⭐ Standard Universal Size (Max 50 KB | 350x450) - عمومی سائز</option>
-            <option value="ppsc_educators_2026" >🔥 PPSC Educators Recruitment (Max 20 KB | 150x200)</option>
-            <option value="cm_youth_scholarship_2026" >🎓 CM Honhaar Scholarship Scheme 2026 (Max 50 KB)</option>
-    </select>
-
-    <label>تصویر منتخب کریں:</label>
-    <div class="btn-upload" onclick="document.getElementById('fileInput').click()">
-        <strong>📁 Click to Select Photo</strong>
-        <span style="display:block; font-size:0.8rem; color:#0369a1; margin-top:4px;">گلیری سے تصویر منتخب کریں</span>
-        <input type="file" id="fileInput" accept="image/*" style="display:none;">
-    </div>
-    <div id="file-name" style="font-size:0.8rem; color:#475569; margin-top:4px; text-align:center;"></div>
-
-    <button class="btn-action" id="processBtn" disabled>تصویر کا سائز کم کریں (Resize)</button>
-
-    <div id="result-box">
-        <div id="status-text" style="color:#166534; font-weight:bold; font-size:0.85rem;"></div>
-        <img id="preview-img" alt="Result">
-        <a id="downloadLink" download="resized-photo.jpg" class="btn-download">📥 Download Photo (ڈاؤن لوڈ کریں)</a>
-    </div>
-
-    <div class="guide-box">
-        <div style="font-size:0.95rem; color:#1e293b; font-weight:bold; margin-bottom:10px;">
-            <span>📢 جدید ترین جابز اور اپلائی گائیڈز</span>
+    <!-- Top Ad Banner Placeholder (Google AdSense Slot) -->
+    <div class="max-w-7xl mx-auto px-4 my-4 w-full" dir="ltr">
+        <div class="bg-slate-100 border border-dashed border-slate-300 rounded-xl p-3 text-center text-xs text-slate-400 min-h-[90px] flex items-center justify-center">
+            <!-- AdSense Code Here Later -->
+            <span>📢 Advertisement Space (AdSense / Sponsor Banner)</span>
         </div>
-        
-            <div class="guide-card" onclick="openGuideModal('ppsc_educators_2026')">
-                <div class="card-header">
-                    <h4>🔥 PPSC ائجوکیٹرز اور تازہ ترین اسامیوں کی گائیڈ</h4>
-                    <span class="view-btn">طریقہ دیکھئے 👁️</span>
-                </div>
-                <p style="margin: 4px 0 0 0; font-size: 0.8rem; color: #64748b;">آخری تاریخ: <strong style="color:#059669;">2026-10-25</strong></p>
-            </div>
-            <div class="guide-card" onclick="openGuideModal('cm_youth_scholarship_2026')">
-                <div class="card-header">
-                    <h4>🎓 وزیراعلیٰ ہونہار سکالرشپ آن لائن اپلائی گائیڈ</h4>
-                    <span class="view-btn">طریقہ دیکھئے 👁️</span>
-                </div>
-                <p style="margin: 4px 0 0 0; font-size: 0.8rem; color: #64748b;">آخری تاریخ: <strong style="color:#059669;">2026-11-15</strong></p>
-            </div>
     </div>
-</div>
 
-<div id="guideModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeGuideModal()">&times;</span>
-        <h3 id="modalTitle"></h3>
-        <p style="font-size:0.8rem; color:#059669; font-weight:bold; margin-bottom:12px;">آخری تاریخ: <span id="modalDeadline"></span></p>
-        <ul id="modalSteps"></ul>
-    </div>
-</div>
-
-<script>
-    var fileInput = document.getElementById('fileInput');
-    var processBtn = document.getElementById('processBtn');
-    var fileName = document.getElementById('file-name');
-    var presetSelect = document.getElementById('preset');
-    var resultBox = document.getElementById('result-box');
-    var previewImg = document.getElementById('preview-img');
-    var statusText = document.getElementById('status-text');
-    var downloadLink = document.getElementById('downloadLink');
-
-    var selectedFile = null;
-    var PRESETS = {"universal_standard":{"maxKB":50,"w":350,"h":450},"ppsc_educators_2026":{"maxKB":20,"w":150,"h":200},"cm_youth_scholarship_2026":{"maxKB":50,"w":800,"h":500}};
-    var POPUP_DATA = {"universal_standard":{"title":"🌐 عمومی / پاسپورٹ سائز اپلوڈ گائیڈ","steps":["یہ سائز تمام عام فارمز، یونیورسٹی داخلوں اور پرائیویٹ جابز کے لیے بہترین ہے۔","تصویر کا پس منظر سفید یا نیلا ہونا چاہیے۔","فائل فارمیٹ صرف JPG یا JPEG ہونا چاہیے۔"],"deadline":"2099-12-31"},"ppsc_educators_2026":{"title":"🔥 PPSC ائجوکیٹرز اور تازہ ترین اسامیوں کی گائیڈ","steps":["PPSC پورٹل (ppsc.gop.pk) پر 150x200 سائز اور 20KB سے کم تصویر ہی قبول ہوتی ہے۔","چالان فارم PSCA یا 1Bill کے ذریعے جمع کرائیں۔","فارم جمع کراتے وقت شناختی کارڈ کی کاپی بھی 20KB سے کم رکھیں۔"],"deadline":"2026-10-25"},"cm_youth_scholarship_2026":{"title":"🎓 وزیراعلیٰ ہونہار سکالرشپ آن لائن اپلائی گائیڈ","steps":["سرکاری ایچ ای سی / پنجاب سکالرشپ پورٹل پر لاگ ان کریں۔","میٹرک اور ایف ایس سی کے رزلٹ کارڈ کا سائز 50KB سے کم اپلوڈ کریں۔","آمدنی کا سرٹیفکیٹ (Income Certificate) بھی 50KB میں ہونا چاہیے۔"],"deadline":"2026-11-15"}};
- 
-  // Function to generate organization logo URL using domain
-  function getOrgLogoUrl(domain, orgName) {
-      if (domain) {
-          return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-      }
-      // Fallback image if domain is missing
-      return `https://ui-avatars.com/api/?name=${encodeURIComponent(orgName)}&background=0D9488&color=fff&bold=true`;
-  }
- 
-
-    fileInput.onchange = function(e) {
-        if (e.target.files && e.target.files[0]) {
-            selectedFile = e.target.files[0];
-            fileName.innerText = "منتخب فائل: " + selectedFile.name;
-            processBtn.disabled = false;
-        }
-    };
-
-    processBtn.onclick = function() {
-        if (!selectedFile) return;
-
-        var preset = PRESETS[presetSelect.value];
-        var reader = new FileReader();
-
-        reader.onload = function(event) {
-            var img = new Image();
-            img.onload = function() {
-                var canvas = document.createElement('canvas');
-                canvas.width = preset.w;
-                canvas.height = preset.h;
-
-                var ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, preset.w, preset.h);
-
-                var quality = 0.9;
-
-                function attemptCompress() {
-                    var dataUrl = canvas.toDataURL('image/jpeg', quality);
-                    var head = 'data:image/jpeg;base64,';
-                    var sizeInBytes = Math.round((dataUrl.length - head.length) * 3 / 4);
-                    var sizeInKB = sizeInBytes / 1024;
-
-                    if (sizeInKB <= preset.maxKB || quality <= 0.1) {
-                        previewImg.src = dataUrl;
-                        downloadLink.href = dataUrl;
-                        statusText.innerText = "✓ کامیابی سے تیار: " + sizeInKB.toFixed(1) + " KB (حد: " + preset.maxKB + " KB)";
-                        resultBox.style.display = 'block';
-                    } else {
-                        quality -= 0.08;
-                        attemptCompress();
-                    }
-                }
-
-                attemptCompress();
-            };
-            img.src = event.target.result;
-        };
-        reader.readAsDataURL(selectedFile);
-    };
-
-    function selectHotJob(id) {
-        presetSelect.value = id;
-        openGuideModal(id);
-    }
-
-    function openGuideModal(id) {
-        var data = POPUP_DATA[id];
-        if (!data) return;
-
-        document.getElementById('modalTitle').innerText = data.title;
-        document.getElementById('modalDeadline').innerText = data.deadline;
+    <!-- 2. Main Content Grid (Tool + Sidebar Layout) -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        var stepsList = document.getElementById('modalSteps');
-        stepsList.innerHTML = '';
-        
-        data.steps.forEach(function(step) {
-            var li = document.createElement('li');
-            li.innerText = step;
-            stepsList.appendChild(li);
-        });
+        <!-- Main Tool Column (8 Cols) -->
+        <section id="resizer-section" class="lg:col-span-8 space-y-6">
+            
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200/80">
+                <h1 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2 text-center">
+                    Pakistani Government Job Photo Resizer
+                </h1>
+                <p class="text-xs md:text-sm text-slate-500 text-center mb-6">
+                    Compress your photo to exact KB (20KB, 50KB) and dimensions (150x200) for PPSC, FPSC, NTS, ETEA & HEC.
+                </p>
 
-        document.getElementById('guideModal').style.display = 'flex';
-    }
+                <!-- Photo Upload & Resizer Interface -->
+                <div class="border-2 border-dashed border-emerald-300 bg-emerald-50/30 rounded-xl p-8 text-center cursor-pointer hover:bg-emerald-50/60 transition mb-6">
+                    <div class="text-3xl mb-2">📸</div>
+                    <label class="block font-semibold text-sm text-slate-700 cursor-pointer">
+                        Choose Photo to Resize
+                        <input type="file" id="imageInput" accept="image/*" class="hidden">
+                    </label>
+                    <p class="text-xs text-slate-400 mt-1">Supports JPG, PNG, WEBP (100% Private, Browser Processing)</p>
+                </div>
 
-    function closeGuideModal() {
-        document.getElementById('guideModal').style.display = 'none';
-    }
+                <!-- Active Preset Dimensions Quick Select -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80 mb-6">
+                    <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3" dir="ltr">Quick Select Portal Preset:</span>
+                    <div class="flex flex-wrap gap-2" dir="ltr">
+                        <button class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-medium">PPSC (20KB | 150x200)</button>
+                        <button class="px-3 py-1.5 bg-white border border-slate-200 hover:border-emerald-500 text-slate-700 rounded-lg text-xs font-medium">FPSC (30KB | 300x300)</button>
+                        <button class="px-3 py-1.5 bg-white border border-slate-200 hover:border-emerald-500 text-slate-700 rounded-lg text-xs font-medium">NTS (50KB | 200x200)</button>
+                        <button class="px-3 py-1.5 bg-white border border-slate-200 hover:border-emerald-500 text-slate-700 rounded-lg text-xs font-medium">ETEA (40KB | 180x220)</button>
+                    </div>
+                </div>
 
-    window.onclick = function(event) {
-        var modal = document.getElementById('guideModal');
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    };
-</script>
+            </div>
+
+            <!-- In-Article AdSense Slot -->
+            <div class="bg-slate-100 border border-dashed border-slate-300 rounded-xl p-4 text-center text-xs text-slate-400 min-h-[120px] flex items-center justify-center" dir="ltr">
+                <span>📢 In-Article Sponsored Content / Ad Space</span>
+            </div>
+
+        </section>
+
+        <!-- 3. Sidebar (4 Cols) - Direct Links to Job Pages & Guides -->
+        <aside class="lg:col-span-4 space-y-6">
+            
+            <!-- Latest Active Job Guides Links -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
+                <h3 class="font-bold text-slate-900 border-b pb-3 mb-4 flex items-center justify-between" dir="ltr">
+                    <span>🔥 Portal Application Guides</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-semibold">2026</span>
+                </h3>
+
+                <ul class="space-y-3 urdu-font text-right text-sm">
+                    <li class="border-b border-slate-100 pb-2">
+                        <a href="/jobs/ppsc_educators_2026.html" class="hover:text-emerald-600 transition block font-bold text-slate-800">
+                            • پی پی ایس سی ایجوکیٹرز اور اسامیوں کی گائیڈ
+                        </a>
+                        <span class="text-xs text-slate-400 block font-sans" dir="ltr">PPSC Official Portal | Max 20KB</span>
+                    </li>
+                    <li class="border-b border-slate-100 pb-2">
+                        <a href="/pages/about.html" class="hover:text-emerald-600 transition block font-bold text-slate-800">
+                            • تصاویر کا سائز کم کرنے کا محفوظ طریقہ
+                        </a>
+                        <span class="text-xs text-slate-400 block font-sans" dir="ltr">100% Client-Side Privacy</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Sidebar Ad Slot -->
+            <div class="bg-slate-100 border border-dashed border-slate-300 rounded-2xl p-6 text-center text-xs text-slate-400 min-h-[250px] flex items-center justify-center" dir="ltr">
+                <span>📢 Sidebar Banner Ad Space (300x250)</span>
+            </div>
+
+            <!-- Quick Navigation Pages Box -->
+            <div class="bg-slate-900 text-white p-5 rounded-2xl shadow-sm" dir="ltr">
+                <h4 class="font-bold text-sm mb-2 text-emerald-400">Important Portal Pages</h4>
+                <p class="text-xs text-slate-300 mb-4">Official policy, privacy terms, and contact setup for candidates.</p>
+                <div class="grid grid-cols-2 gap-2 text-xs font-medium">
+                    <a href="/pages/privacy.html" class="bg-slate-800 hover:bg-slate-700 p-2 rounded text-center text-slate-200">Privacy Policy</a>
+                    <a href="/pages/about.html" class="bg-slate-800 hover:bg-slate-700 p-2 rounded text-center text-slate-200">About Us</a>
+                    <a href="/pages/terms.html" class="bg-slate-800 hover:bg-slate-700 p-2 rounded text-center text-slate-200">Terms of Use</a>
+                    <a href="/pages/contact.html" class="bg-slate-800 hover:bg-slate-700 p-2 rounded text-center text-slate-200">Contact Us</a>
+                </div>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- 4. Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8 mt-12" dir="ltr">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div>
+                <p class="font-semibold text-slate-700">PakJob Utility Portal © 2026</p>
+                <p class="text-slate-400">Independent document preparation utility. Not affiliated with government testing agencies.</p>
+            </div>
+            <div class="flex items-center gap-6 font-medium text-slate-600">
+                <a href="/pages/privacy.html" class="hover:text-emerald-600">Privacy Policy</a>
+                <a href="/pages/about.html" class="hover:text-emerald-600">About Us</a>
+                <a href="/pages/terms.html" class="hover:text-emerald-600">Terms of Service</a>
+                <a href="/pages/contact.html" class="hover:text-emerald-600">Contact Support</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
