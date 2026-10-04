@@ -10,20 +10,20 @@ async function fetchTrendingJobsWithGemini() {
     const today = new Date().toISOString().split('T')[0];
     const currentYear = new Date().getFullYear();
 
-   const prompt = `CRITICAL INSTRUCTION: Today's date is ${today}. The current year is strictly ${currentYear}. 
+const prompt = `CRITICAL INSTRUCTION: Today's date is ${today}. The current year is strictly ${currentYear}. 
 
-Search for CURRENTLY ACTIVE government job recruitments, admissions, or scholarship schemes in Pakistan for October ${currentYear} or upcoming deadlines in late ${currentYear}. 
+Search for CURRENTLY ACTIVE government job recruitments, admissions, or scholarship schemes in Pakistan for October ${currentYear}. 
 
 STRICT RULES:
-1. Do NOT return any deadlines or IDs from 2024 or 2025. All deadlines MUST be future dates relative to ${today} in ${currentYear}.
-2. Ensure realistic photo compression limits (e.g. 20KB to 100KB) and dimensions (e.g. 150x200, 300x300, 500x500) matching Pakistani portals (PPSC, FPSC, NTS, HEC, ETEA).
-3. GUIDE STEPS REQUIREMENT: Provide 3 to 4 short, clear, yet highly informative Urdu steps. Each step must be concise, professional, and explain the exact action (e.g., specific portal link/fee channel, document resizing, and final submission). Avoid extremely brief 2-3 word sentences.
+1. Return ONLY a valid JSON array of objects with no markdown or extra text.
+2. Provide official web domains (e.g., "ppsc.gop.pk", "fpsc.gov.pk", "hec.gov.pk", "nts.org.pk") for fetching organization logos.
 
-Return ONLY a valid JSON array of objects with no markdown or extra text:
+JSON Structure required:
 [
   {
     "id": "unique_string_${currentYear}",
     "name": "Scheme/Job Name (Max KB | WidthxHeight)",
+    "domain": "ppsc.gop.pk",
     "maxKB": number_in_kb,
     "w": width_in_pixels,
     "h": height_in_pixels,
@@ -32,9 +32,8 @@ Return ONLY a valid JSON array of objects with no markdown or extra text:
     "guideTitle": "مختصر اور واضح عنوان مع ${currentYear}",
     "guideSteps": [
       "آن لائن پورٹل پر پروفائل بنائیں اور مطلوبہ اسامی منتخب کریں۔",
-      "چالان فارم / 1Bill / 1Link کے ذریعے متعلقہ بینک یا ایزی پیسہ سے فیس ادا کریں۔",
-      "مطلوبہ سائز (KB) اور ڈائمینشنز کے مطابق پاسپورٹ سائز تصویر اور CNIC اپ لوڈ کریں۔",
-      "معلومات کی تصدیق کے بعد فارم فائنل سبمٹ کر کے پرنٹ اور نمبر محفوظ رکھیں۔"
+      "چالان فارم / 1Bill / 1Link کے ذریعے فیس ادا کریں۔",
+      "مطلوبہ سائز (KB) کے مطابق پاسپورٹ سائز تصویر اپ لوڈ کریں۔"
     ]
   }
 ]`;

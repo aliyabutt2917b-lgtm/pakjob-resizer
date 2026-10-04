@@ -121,6 +121,16 @@
     var selectedFile = null;
     var PRESETS = {"universal_standard":{"maxKB":50,"w":350,"h":450},"ppsc_educators_2026":{"maxKB":20,"w":150,"h":200},"cm_youth_scholarship_2026":{"maxKB":50,"w":800,"h":500}};
     var POPUP_DATA = {"universal_standard":{"title":"🌐 عمومی / پاسپورٹ سائز اپلوڈ گائیڈ","steps":["یہ سائز تمام عام فارمز، یونیورسٹی داخلوں اور پرائیویٹ جابز کے لیے بہترین ہے۔","تصویر کا پس منظر سفید یا نیلا ہونا چاہیے۔","فائل فارمیٹ صرف JPG یا JPEG ہونا چاہیے۔"],"deadline":"2099-12-31"},"ppsc_educators_2026":{"title":"🔥 PPSC ائجوکیٹرز اور تازہ ترین اسامیوں کی گائیڈ","steps":["PPSC پورٹل (ppsc.gop.pk) پر 150x200 سائز اور 20KB سے کم تصویر ہی قبول ہوتی ہے۔","چالان فارم PSCA یا 1Bill کے ذریعے جمع کرائیں۔","فارم جمع کراتے وقت شناختی کارڈ کی کاپی بھی 20KB سے کم رکھیں۔"],"deadline":"2026-10-25"},"cm_youth_scholarship_2026":{"title":"🎓 وزیراعلیٰ ہونہار سکالرشپ آن لائن اپلائی گائیڈ","steps":["سرکاری ایچ ای سی / پنجاب سکالرشپ پورٹل پر لاگ ان کریں۔","میٹرک اور ایف ایس سی کے رزلٹ کارڈ کا سائز 50KB سے کم اپلوڈ کریں۔","آمدنی کا سرٹیفکیٹ (Income Certificate) بھی 50KB میں ہونا چاہیے۔"],"deadline":"2026-11-15"}};
+ 
+  // Function to generate organization logo URL using domain
+  function getOrgLogoUrl(domain, orgName) {
+      if (domain) {
+          return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+      }
+      // Fallback image if domain is missing
+      return `https://ui-avatars.com/api/?name=${encodeURIComponent(orgName)}&background=0D9488&color=fff&bold=true`;
+  }
+ 
 
     fileInput.onchange = function(e) {
         if (e.target.files && e.target.files[0]) {
